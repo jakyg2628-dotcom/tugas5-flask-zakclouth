@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Tentang{% endblock %}
+
+{% block content %}
+  <h1 class="h3">Tentang Kami</h1>
+  <p>{{ nama_toko }} adalah toko pakaian kasual yang didirikan oleh M Zaky Sai untuk
+     melayani mahasiswa dan anak muda yang ingin tampil nyaman dan bergaya.</p>
+  <ul>
+    <li>Bahan berkualitas dan nyaman dipakai</li>
+    <li>Harga ramah kantong mahasiswa</li>
+    <li>Program member dengan username pribadi</li>
+  </ul>
+  <a href="{{ url_for('kontak') }}">Hubungi kami &raquo;</a>
+{% endblock %}

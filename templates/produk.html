@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Produk{% endblock %}
+
+{% block content %}
+  <h1 class="h3">Daftar Produk</h1>
+
+  <form class="row g-2 mb-3" method="get" action="{{ url_for('produk') }}">
+    <div class="col-auto">
+      <input class="form-control" type="search" name="q" value="{{ kata }}"
+             placeholder="Cari pakaian...">
+    </div>
+    <div class="col-auto"><button class="btn btn-dark">Cari</button></div>
+  </form>
+
+  {% if kata %}
+    <p class="text-muted">Hasil pencarian untuk "{{ kata }}": {{ produk | length }} produk</p>
+  {% endif %}
+
+  <table class="table table-striped align-middle">
+    <thead>
+      <tr><th>No</th><th>Produk</th><th>Kategori</th><th>Harga</th><th>Stok</th><th></th></tr>
+    </thead>
+    <tbody>
+    {% for p in produk %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ p.nama }}</td>
+        <td>{{ p.kategori | title }}</td>
+        <td>{{ p.harga | rupiah }}</td>
+        <td>
+          {% if p.stok == 0 %}<span class="badge bg-danger">Habis</span>
+          {% elif p.stok < 5 %}<span class="badge bg-warning text-dark">Sisa {{ p.stok }}</span>
+          {% else %}<span class="badge bg-success">{{ p.stok }}</span>{% endif %}
+        </td>
+        <td><a class="btn btn-sm btn-outline-dark" href="{{ url_for('detail_produk', id=p.id) }}">Detail</a></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6" class="text-center text-muted">Belum ada produk</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

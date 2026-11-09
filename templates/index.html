@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Beranda{% endblock %}
+
+{% block content %}
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <h1 class="display-6">Selamat datang di {{ nama_toko }}</h1>
+    <p class="lead">Fashion kasual berkualitas dengan harga ramah kantong anak muda.</p>
+    <a class="btn btn-dark" href="{{ url_for('produk') }}">Lihat Produk</a>
+    <a class="btn btn-outline-dark" href="{{ url_for('cek_username') }}">Cek Username Member</a>
+  </div>
+
+  <h2 class="h4">Produk Tersedia</h2>
+  <div class="row g-3">
+    {% for p in terlaris %}
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ p.nama }}</h5>
+          <p class="card-text">{{ p.deskripsi | truncate(50) }}</p>
+          <p class="fw-bold mb-2">{{ p.harga | rupiah }}</p>
+          <a href="{{ url_for('detail_produk', id=p.id) }}" class="btn btn-sm btn-outline-dark">Detail</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

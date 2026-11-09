@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Profil {{ username }}{% endblock %}
+
+{% block content %}
+  <h1 class="h3">{{ u.nama }}
+    {% if u.member %}<span class="badge bg-success">Member</span>
+    {% else %}<span class="badge bg-secondary">Non-member</span>{% endif %}
+  </h1>
+  <p class="text-muted">@{{ username }}</p>
+
+  <ul class="list-unstyled">
+    <li>Email: {{ u.email }}</li>
+    <li>Jumlah hobi: {{ u.hobi | length }}</li>
+    <li>Hobi: {{ u.hobi | join(", ") | default("-", true) }}</li>
+  </ul>
+
+  {% if not u.member %}
+    <a class="btn btn-dark" href="{{ url_for('kontak') }}">Daftar jadi member</a>
+  {% endif %}
+  <a class="btn btn-outline-dark" href="{{ url_for('daftar_user') }}">&laquo; Semua member</a>
+{% endblock %}

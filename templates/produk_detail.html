@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ p.nama }}{% endblock %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('produk') }}">Produk</a></li>
+      <li class="breadcrumb-item active">{{ p.nama }}</li>
+    </ol>
+  </nav>
+
+  <h1 class="h3">{{ p.nama }}</h1>
+  <p class="text-muted">Kategori: {{ p.kategori | title }}</p>
+  <p>{{ p.deskripsi }}</p>
+  <p class="fs-4 fw-bold">{{ p.harga | rupiah }}</p>
+
+  {% if p.stok == 0 %}
+    <p class="text-danger">Stok habis</p>
+  {% elif p.stok < 5 %}
+    <p class="text-warning">Sisa {{ p.stok }} lagi!</p>
+  {% else %}
+    <p>Stok tersedia ({{ p.stok }})</p>
+  {% endif %}
+
+  <a class="btn btn-outline-dark" href="{{ url_for('produk') }}">&laquo; Kembali</a>
+{% endblock %}

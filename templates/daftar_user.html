@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Daftar Member{% endblock %}
+
+{% block content %}
+  <h1 class="h3">Username Terdaftar</h1>
+  <table class="table">
+    <thead><tr><th>No</th><th>Username</th><th>Nama</th><th>Status</th></tr></thead>
+    <tbody>
+    {% for username, u in pengguna.items() %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td><a href="{{ url_for('profil_user', username=username) }}">{{ username | upper }}</a></td>
+        <td>{{ u.nama | title }}</td>
+        <td>{{ "Member" if u.member else "Non-member" }}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="4" class="text-center">Belum ada pengguna</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
